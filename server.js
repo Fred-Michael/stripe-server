@@ -3,17 +3,14 @@ const cors = require('cors');
 const bodyparser = require('body-parser');
 
 const app = express();
-let corsOptions = {
-    origin: ['http://localhost:4200'],
-}
 app.use(express.static("public"));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 const stripe = require("stripe")("sk_test_51PlvRgG1Zj6TIJKdXUtt0lgysWbL7KY0k4ythth1HFodYOuFhsyQYRexWdz9dZe3aPLOyXYCNazjcpfscJObXEOm00X8WFZSI8");
 
-app.post("/checkout", cors(corsOptions), async (req, res, next) => {
+app.post("/checkout", async (req, res, next) => {
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],

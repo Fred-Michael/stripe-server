@@ -10,7 +10,7 @@ app.use(cors());
 
 const stripe = require("stripe")("sk_test_51PlvRgG1Zj6TIJKdXUtt0lgysWbL7KY0k4ythth1HFodYOuFhsyQYRexWdz9dZe3aPLOyXYCNazjcpfscJObXEOm00X8WFZSI8");
 
-app.post("/checkout", async (req, res, next) => {
+app.post("https://stripecheckout.netlify.app/checkout", async (req, res, next) => {
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -74,11 +74,10 @@ app.post("/checkout", async (req, res, next) => {
             success_url: "https://stripecheckout.netlify.app/success.html",
             cancel_url: "https://stripecheckout.netlify.app/cancel.html"
         });
-
         res.status(200).json(session);
     } catch (error) {
         next(error);
     }
 });
 
-//app.listen(4242, () => console.log('app is running on 4242'));
+app.listen(PORT, '0.0.0.0', () => console.log(`app is running on ${PORT}`));

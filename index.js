@@ -12,7 +12,13 @@ $2685e5b20c9f29f6$var$app.use($hXvsm$bodyparser.urlencoded({
     extended: false
 }));
 $2685e5b20c9f29f6$var$app.use($hXvsm$bodyparser.json());
-$2685e5b20c9f29f6$var$app.use($hXvsm$cors());
+const $2685e5b20c9f29f6$var$corsOptions = {
+    origin: "https://ambitious-dune-06392b30f.5.azurestaticapps.net",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true
+};
+$2685e5b20c9f29f6$var$app.use($hXvsm$cors($2685e5b20c9f29f6$var$corsOptions));
+$2685e5b20c9f29f6$var$app.options("*", $hXvsm$cors($2685e5b20c9f29f6$var$corsOptions));
 
 const $2685e5b20c9f29f6$var$stripe = $hXvsm$stripe("sk_test_51PlvRgG1Zj6TIJKdXUtt0lgysWbL7KY0k4ythth1HFodYOuFhsyQYRexWdz9dZe3aPLOyXYCNazjcpfscJObXEOm00X8WFZSI8");
 $2685e5b20c9f29f6$var$app.post("https://stripecheckout.netlify.app/checkout", async (req, res, next)=>{

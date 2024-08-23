@@ -6,7 +6,14 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
-app.use(cors());
+
+const corsOptions = {
+    origin: 'https://ambitious-dune-06392b30f.5.azurestaticapps.net',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  };
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 const stripe = require("stripe")("sk_test_51PlvRgG1Zj6TIJKdXUtt0lgysWbL7KY0k4ythth1HFodYOuFhsyQYRexWdz9dZe3aPLOyXYCNazjcpfscJObXEOm00X8WFZSI8");
 
